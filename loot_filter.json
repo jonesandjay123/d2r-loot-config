@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "kill_switch": false,
+  "description": "D2R PixelBot 撿寶策略設定 — 修改後下一輪 run 自動生效",
+
+  "pickup_by_color": {
+    "gold": {
+      "enabled": true,
+      "label": "暗金 Unique",
+      "description": "暗金色物品（獨特裝備）"
+    },
+    "green": {
+      "enabled": true,
+      "label": "套裝 Set",
+      "description": "綠色物品（套裝裝備）"
+    },
+    "orange": {
+      "enabled": true,
+      "label": "符文/工藝 Rune/Crafted",
+      "description": "橘色物品（符文、工藝品）"
+    },
+    "yellow": {
+      "enabled": true,
+      "label": "稀有 Rare",
+      "description": "黃色物品（稀有裝備）",
+      "filter": {
+        "mode": "all",
+        "note": "mode: 'all' = 撿所有黃色, 'whitelist' = 只撿清單內的類別, 'none' = 不撿",
+        "whitelist": [
+          "ring",
+          "amulet",
+          "gloves",
+          "boots",
+          "circlet",
+          "belt"
+        ]
+      }
+    },
+    "blue_special": {
+      "enabled": true,
+      "label": "藍色特殊 (符咒/珠寶)",
+      "description": "藍色符咒和珠寶（透過 suffix template 偵測）"
+    },
+    "white_special": {
+      "enabled": true,
+      "label": "白色特殊 (活力藥水/寶石)",
+      "description": "活力藥水、全方位活力藥水、無瑕寶石"
+    }
+  },
+
+  "sell_by_color": {
+    "gray": true,
+    "blue": true,
+    "white": true,
+    "yellow": true,
+    "note": "賣出的顏色。黃色珠寶/戒指/護身符透過 template 保護不賣"
+  },
+
+  "stash_colors": {
+    "note": "撿到後存倉庫的顏色（不賣）",
+    "colors": ["gold", "green", "orange", "yellow", "blue_special"]
+  }
+}
