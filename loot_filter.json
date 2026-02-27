@@ -61,5 +61,15 @@
       "orange",
       "blue_special"
     ]
+  },
+  "name_filter": {
+    "description": "依物品名稱篩選（OCR 辨識）。優先於顏色規則。",
+    "keep_names": [
+      "厚腰帶",
+      "面具",
+      "三尖槍"
+    ],
+    "skip_names": [],
+    "note": "keep_names: 名字命中就撿（無視顏色）; skip_names: 名字命中就跳過（即使顏色說撿）"
   }
 }
