@@ -1,22 +1,17 @@
 {
   "version": 2,
   "kill_switch": false,
-  "description": "D2R PixelBot 撿寶策略 v2 — 每個顏色獨立控制：'*' = 無條件撿, [] = 不撿, ['名稱'] = 只撿清單內",
+  "description": "D2R PixelBot 撿寶策略 v2 — '*' = 無條件撿, [] = 不撿, ['名稱'] = 只撿清單內",
   "pickup": {
     "gold":   { "label": "暗金 Unique",    "names": "*" },
     "green":  { "label": "套裝 Set",       "names": "*" },
     "orange": { "label": "符文/工藝 Rune",  "names": "*" },
     "yellow": { "label": "稀有 Rare",      "names": "*" },
-    "blue":   { "label": "魔法 Magic",     "names": ["解繃者頭顱", "凸緣釘鎚", "紫杉魔杖"] },
-    "white":  { "label": "普通 Normal",    "names": [] },
+    "blue":   { "label": "魔法 Magic",     "names": ["珠寶", "符咒", "解繃者頭顱", "凸緣釘鎚", "紫杉魔杖"] },
+    "white":  { "label": "普通 Normal",    "names": ["活力藥水", "全方位活力藥水", "寶石", "無瑕"] },
     "gray":   { "label": "底材 Superior",  "names": [] }
   },
-  "special_pickup": {
-    "white_special": { "label": "活力藥水/寶石", "enabled": true },
-    "blue_special":  { "label": "藍色珠寶/符咒", "enabled": true },
-    "note": "這些用現有 template matching，未來可改 OCR"
-  },
   "sell_colors": ["gray", "blue", "white", "yellow"],
-  "stash_colors": ["gold", "green", "orange", "blue_special", "white_special"],
-  "note": "未來越來越有錢：gold 從 '*' 改成 ['XX暗金', 'YY暗金'] 就能挑著撿"
+  "stash_colors": ["gold", "green", "orange"],
+  "note": "模糊比對：'寶石' 命中所有 XX寶石，'無瑕' 命中所有 無瑕疵XX，'符咒' 命中大/小/超大型符咒"
 }
