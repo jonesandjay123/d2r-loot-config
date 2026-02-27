@@ -7,11 +7,11 @@
     "green":  { "label": "套裝 Set",       "names": "*" },
     "orange": { "label": "符文/工藝 Rune",  "names": "*" },
     "yellow": { "label": "稀有 Rare",      "names": "*" },
-    "blue":   { "label": "魔法 Magic",     "names": ["珠寶", "符咒", "解繃者頭顱", "凸緣釘鎚", "紫杉魔杖"] },
+    "blue":   { "label": "魔法 Magic",     "names": ["珠寶", "符咒"] },
     "white":  { "label": "普通 Normal",    "names": ["活力藥水", "全方位活力藥水", "寶石", "無瑕"] },
-    "gray":   { "label": "底材 Superior",  "names": [] }
+    "gray":   { "label": "底材 Superior",  "names": ["闊劍", "長劍"] }
   },
   "sell_colors": ["gray", "blue", "white", "yellow"],
-  "stash_colors": ["gold", "green", "orange"],
-  "note": "模糊比對：'寶石' 命中所有 XX寶石，'無瑕' 命中所有 無瑕疵XX，'符咒' 命中大/小/超大型符咒"
+  "stash_colors": ["gold", "green", "orange", "blue", "white", "gray", "yellow"],
+  "note": "stash = sell 過濾後剩下的全部存倉；模糊比對：'符咒' 命中大/小/超大型符咒"
 }
