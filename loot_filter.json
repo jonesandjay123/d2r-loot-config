@@ -20,7 +20,7 @@
       "description": "橘色物品（符文、工藝品）"
     },
     "yellow": {
-      "enabled": true,
+      "enabled": false,
       "label": "稀有 Rare",
       "description": "黃色物品（稀有裝備）",
       "filter": {
