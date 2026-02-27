@@ -43,6 +43,14 @@
         "闊劍",
         "長劍"
       ]
+    },
+    "white_special": {
+      "label": "白色特殊（舊template）",
+      "names": "*"
+    },
+    "blue_special": {
+      "label": "藍色特殊（舊template）",
+      "names": "*"
     }
   },
   "sell_colors": [
