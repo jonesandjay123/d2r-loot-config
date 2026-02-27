@@ -2,7 +2,6 @@
   "version": 1,
   "kill_switch": false,
   "description": "D2R PixelBot 撿寶策略設定 — 修改後下一輪 run 自動生效",
-
   "pickup_by_color": {
     "gold": {
       "enabled": true,
@@ -47,7 +46,6 @@
       "description": "活力藥水、全方位活力藥水、無瑕寶石"
     }
   },
-
   "sell_by_color": {
     "gray": true,
     "blue": true,
@@ -55,9 +53,13 @@
     "yellow": true,
     "note": "賣出的顏色。黃色珠寶/戒指/護身符透過 template 保護不賣"
   },
-
   "stash_colors": {
     "note": "撿到後存倉庫的顏色（不賣）",
-    "colors": ["gold", "green", "orange", "yellow", "blue_special"]
+    "colors": [
+      "gold",
+      "green",
+      "orange",
+      "blue_special"
+    ]
   }
 }
