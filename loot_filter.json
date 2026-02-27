@@ -39,12 +39,7 @@
     },
     "gray": {
       "label": "底材 Superior",
-      "names": [
-        "闊劍",
-        "長劍",
-        "長釗",
-        "闊釗"
-      ]
+      "names": []
     },
     "white_special": {
       "label": "白色特殊（舊template）",
