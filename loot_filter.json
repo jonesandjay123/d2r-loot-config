@@ -1,75 +1,22 @@
 {
-  "version": 1,
+  "version": 2,
   "kill_switch": false,
-  "description": "D2R PixelBot 撿寶策略設定 — 修改後下一輪 run 自動生效",
-  "pickup_by_color": {
-    "gold": {
-      "enabled": true,
-      "label": "暗金 Unique",
-      "description": "暗金色物品（獨特裝備）"
-    },
-    "green": {
-      "enabled": true,
-      "label": "套裝 Set",
-      "description": "綠色物品（套裝裝備）"
-    },
-    "orange": {
-      "enabled": true,
-      "label": "符文/工藝 Rune/Crafted",
-      "description": "橘色物品（符文、工藝品）"
-    },
-    "yellow": {
-      "enabled": true,
-      "label": "稀有 Rare",
-      "description": "黃色物品（稀有裝備）",
-      "filter": {
-        "mode": "all",
-        "note": "mode: 'all' = 撿所有黃色, 'whitelist' = 只撿清單內的類別, 'none' = 不撿",
-        "whitelist": [
-          "ring",
-          "amulet",
-          "gloves",
-          "boots",
-          "circlet",
-          "belt"
-        ]
-      }
-    },
-    "blue_special": {
-      "enabled": true,
-      "label": "藍色特殊 (符咒/珠寶)",
-      "description": "藍色符咒和珠寶（透過 suffix template 偵測）"
-    },
-    "white_special": {
-      "enabled": true,
-      "label": "白色特殊 (活力藥水/寶石)",
-      "description": "活力藥水、全方位活力藥水、無瑕寶石"
-    }
+  "description": "D2R PixelBot 撿寶策略 v2 — 每個顏色獨立控制：'*' = 無條件撿, [] = 不撿, ['名稱'] = 只撿清單內",
+  "pickup": {
+    "gold":   { "label": "暗金 Unique",    "names": "*" },
+    "green":  { "label": "套裝 Set",       "names": "*" },
+    "orange": { "label": "符文/工藝 Rune",  "names": "*" },
+    "yellow": { "label": "稀有 Rare",      "names": "*" },
+    "blue":   { "label": "魔法 Magic",     "names": ["解繃者頭顱", "凸緣釘鎚", "紫杉魔杖"] },
+    "white":  { "label": "普通 Normal",    "names": [] },
+    "gray":   { "label": "底材 Superior",  "names": [] }
   },
-  "sell_by_color": {
-    "gray": true,
-    "blue": true,
-    "white": true,
-    "yellow": true,
-    "note": "賣出的顏色。黃色珠寶/戒指/護身符透過 template 保護不賣"
+  "special_pickup": {
+    "white_special": { "label": "活力藥水/寶石", "enabled": true },
+    "blue_special":  { "label": "藍色珠寶/符咒", "enabled": true },
+    "note": "這些用現有 template matching，未來可改 OCR"
   },
-  "stash_colors": {
-    "note": "撿到後存倉庫的顏色（不賣）",
-    "colors": [
-      "gold",
-      "green",
-      "orange",
-      "blue_special"
-    ]
-  },
-  "name_filter": {
-    "description": "依物品名稱篩選（OCR 辨識）。優先於顏色規則。",
-    "keep_names": [
-      "厚腰帶",
-      "面具",
-      "三尖槍"
-    ],
-    "skip_names": [],
-    "note": "keep_names: 名字命中就撿（無視顏色）; skip_names: 名字命中就跳過（即使顏色說撿）"
-  }
+  "sell_colors": ["gray", "blue", "white", "yellow"],
+  "stash_colors": ["gold", "green", "orange", "blue_special", "white_special"],
+  "note": "未來越來越有錢：gold 從 '*' 改成 ['XX暗金', 'YY暗金'] 就能挑著撿"
 }
