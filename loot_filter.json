@@ -39,7 +39,10 @@
     },
     "gray": {
       "label": "底材 Superior",
-      "names": []
+      "names": [
+        "闊劍",
+        "長劍"
+      ]
     },
     "white_special": {
       "label": "白色特殊（舊template）",
