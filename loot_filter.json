@@ -23,9 +23,7 @@
       "label": "魔法 Magic",
       "names": [
         "珠寶",
-        "小型咒符",
-        "大型咒符",
-        "特大咒符"
+        "符咒"
       ]
     },
     "white": {
@@ -41,10 +39,7 @@
     },
     "gray": {
       "label": "底材 Superior",
-      "names": [
-        "闊劍",
-        "長劍"
-      ]
+      "names": []
     },
     "white_special": {
       "label": "白色特殊（舊template）",
