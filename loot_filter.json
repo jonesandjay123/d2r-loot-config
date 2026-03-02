@@ -1,65 +1,38 @@
 {
-  "version": 1,
+  "version": 3,
   "kill_switch": false,
-  "description": "D2R PixelBot 撿寶策略設定 — 修改後下一輪 run 自動生效",
-  "pickup_by_color": {
+  "description": "D2R PixelBot 撿寶策略 v3 — embedding 辨識版。'*' = 全撿, [] = 不撿, ['名'] = 模糊比對清單",
+  "pickup": {
     "gold": {
-      "enabled": true,
       "label": "暗金 Unique",
-      "description": "暗金色物品（獨特裝備）"
+      "names": "*"
     },
     "green": {
-      "enabled": true,
       "label": "套裝 Set",
-      "description": "綠色物品（套裝裝備）"
+      "names": "*"
     },
     "orange": {
-      "enabled": true,
-      "label": "符文/工藝 Rune/Crafted",
-      "description": "橘色物品（符文、工藝品）"
+      "label": "符文/工藝 Rune",
+      "names": "*"
     },
     "yellow": {
-      "enabled": true,
       "label": "稀有 Rare",
-      "description": "黃色物品（稀有裝備）",
-      "filter": {
-        "mode": "all",
-        "note": "mode: 'all' = 撿所有黃色, 'whitelist' = 只撿清單內的類別, 'none' = 不撿",
-        "whitelist": [
-          "ring",
-          "amulet",
-          "gloves",
-          "boots",
-          "circlet",
-          "belt"
-        ]
-      }
+      "names": "*"
     },
-    "blue_special": {
-      "enabled": true,
-      "label": "藍色特殊 (符咒/珠寶)",
-      "description": "藍色符咒和珠寶（透過 suffix template 偵測）"
+    "blue": {
+      "label": "魔法 Magic",
+      "names": ["珠寶", "咒符"]
     },
-    "white_special": {
-      "enabled": true,
-      "label": "白色特殊 (活力藥水/寶石)",
-      "description": "活力藥水、全方位活力藥水、無瑕寶石"
+    "white": {
+      "label": "普通 Normal",
+      "names": ["活力藥水", "全方位活力藥水", "瑕疵", "寶石"]
+    },
+    "gray": {
+      "label": "底材 Superior",
+      "names": []
     }
   },
-  "sell_by_color": {
-    "gray": true,
-    "blue": true,
-    "white": true,
-    "yellow": true,
-    "note": "賣出的顏色。黃色珠寶/戒指/護身符透過 template 保護不賣"
-  },
-  "stash_colors": {
-    "note": "撿到後存倉庫的顏色（不賣）",
-    "colors": [
-      "gold",
-      "green",
-      "orange",
-      "blue_special"
-    ]
-  }
+  "sell_colors": ["gray", "blue", "white", "yellow"],
+  "stash_colors": ["gold", "green", "orange"],
+  "note": "模糊比對：'咒符' 命中 特大咒符/大型咒符/小型咒符；'寶石' 命中所有寶石；'瑕疵' 命中瑕疵紅寶石等"
 }
