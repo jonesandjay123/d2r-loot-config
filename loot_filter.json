@@ -5,11 +5,17 @@
   "pickup": {
     "gold": {
       "label": "暗金 Unique",
-      "names": "*"
+      "names": "*",
+      "exclude": [
+        "釘頭鎚"
+      ]
     },
     "green": {
       "label": "套裝 Set",
-      "names": "*"
+      "names": "*",
+      "exclude": [
+        "頭盔"
+      ]
     },
     "orange": {
       "label": "符文/工藝 Rune",
@@ -21,18 +27,35 @@
     },
     "blue": {
       "label": "魔法 Magic",
-      "names": ["珠寶", "咒符"]
+      "names": [
+        "珠寶",
+        "咒符"
+      ]
     },
     "white": {
       "label": "普通 Normal",
-      "names": ["活力藥水", "全方位活力藥水", "瑕疵", "寶石"]
+      "names": [
+        "活力藥水",
+        "全方位活力藥水",
+        "瑕疵",
+        "寶石"
+      ]
     },
     "gray": {
       "label": "底材 Superior",
       "names": []
     }
   },
-  "sell_colors": ["gray", "blue", "white", "yellow"],
-  "stash_colors": ["gold", "green", "orange"],
+  "sell_colors": [
+    "gray",
+    "blue",
+    "white",
+    "yellow"
+  ],
+  "stash_colors": [
+    "gold",
+    "green",
+    "orange"
+  ],
   "note": "模糊比對：'咒符' 命中 特大咒符/大型咒符/小型咒符；'寶石' 命中所有寶石；'瑕疵' 命中瑕疵紅寶石等"
 }
