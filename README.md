@@ -2,6 +2,13 @@
 
 D2R PixelBot 的遠端撿寶策略設定。
 
+## 📖 裝備名稱速查表
+
+👉 **[線上版（GitHub Pages）](https://jonesandjay123.github.io/d2r-loot-config/)**
+
+597 個 D2R 物品中英對照，支援搜尋 + 一鍵複製，手機也能用。
+用途：編輯 `loot_filter.json` 時快速查詢物品中文名。
+
 Bot 每輪 run 開始前會從此 repo 的 `loot_filter.json` 讀取最新設定。
 修改 JSON → push → 下一輪自動生效，不需要重啟 bot。
 
