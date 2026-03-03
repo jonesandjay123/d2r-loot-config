@@ -43,7 +43,9 @@
     },
     "gray": {
       "label": "底材 Superior",
-      "names": []
+      "names": [
+        "骸骨魔杖"
+      ]
     }
   },
   "sell_colors": [
