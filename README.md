@@ -181,9 +181,14 @@ Bot 根據「出售價格」文字亮度判定灰色 vs 白色：
 
 **黃色裝備（全撿 names: "*"）：**
 ```
-sell_protect 裡放 20 項手套/靴子名稱
+sell_protect 裡放手套/靴子/戒指/護身符/珠寶名稱
 黃色其他裝備 → 全部賣掉（接受風險）
 ```
+
+> ⚠️ **2026-03-07 教訓：** v1.7 從 template matching 換成 OCR 時，
+> 舊的 `protect_ring.png`、`protect_jewel.png`、`protect_amulet.png` 被移除，
+> 但忘了把「戒指」「護身符」「珠寶」加進 `sell_protect`，導致黃色戒指被賣掉。
+> **遷移保護機制時，務必確認所有舊保護項都有對應到新機制。**
 
 ### Debug：物品被意外賣掉怎麼辦？
 
