@@ -1,0 +1,6 @@
+{
+  "_comment": "D2R 官方物品過濾器設定 — 貼到遊戲內使用",
+  "_usage": "遊戲內 Options → Item Filter → Import → 貼上此 JSON",
+  "_updated": "2026-03-09",
+  "filter": {}
+}
