@@ -1,37 +1,70 @@
 # D2R Loot Config
 
-D2R PixelBot 的遠端撿寶策略設定。
+D2R PixelBot 的物品過濾設定 + 官方 Filter 分析工具。
 
 ## 📖 裝備名稱速查表
 
 👉 **[線上版（GitHub Pages）](https://jonesandjay123.github.io/d2r-loot-config/)**
 
 597 個 D2R 物品中英對照，支援搜尋 + 一鍵複製，手機也能用。
-用途：編輯 `loot_filter.json` 時快速查詢物品中文名。
 
-Bot 每輪 run 開始前會從此 repo 的 `loot_filter.json` 讀取最新設定。
-修改 JSON → push → 下一輪自動生效，不需要重啟 bot。
+## 目前架構（v2.1）
 
-## 使用方式
-
-1. 編輯 `loot_filter.json`（GitHub 網頁 / 手機 / Jarvis 幫改）
-2. Commit & Push
-3. Bot 下一輪自動讀取新設定
-
-## 架構
+> **2026-03-12 重大改版：** d2r-pixelbot 已完全脫離本 repo 的遠端 config。
+> 撿物 = D2R 官方 filter（畫面上看到就撿），賣出保護 = hardcoded in `sell.py`。
+> 本 repo 現在的角色是：**官方 filter 備份 + 分析工具 + 裝備速查表**。
 
 ```
-你（手機/電腦/跟 Jarvis 說）
+D2R 遊戲內官方 Filter
        │
        ▼
-  編輯 loot_filter.json → push to GitHub
+  遊戲只顯示值得撿的物品（手套/靴/戒指/底材等）
        │
        ▼
-  Bot GET raw.githubusercontent.com/.../loot_filter.json
+  Bot 看到就撿（HSV 偵測）
        │
-       ├→ 成功 → 用遠端設定（同時更新 local cache）
-       └→ 失敗 → 用本地 fallback（上次成功的版本）
+       ▼
+  回城賣出時 → sell.py hardcoded protect 清單保護
+       │
+       ├→ 黃/金/綠/橘 → 絕不賣
+       ├→ 灰/藍/白 → OCR 讀物品名稱 → 比對 protect 關鍵字
+       │    ├→ 匹配 → 🛡 不賣
+       │    └→ 不匹配 → 💰 賣掉
+       └→ 未知 → 不賣
 ```
+
+## 📂 檔案說明
+
+| 檔案 | 用途 |
+|------|------|
+| `d2r_official_filter.json` | 遊戲內官方 Filter 設定備份（從遊戲 copy 出來） |
+| `parse_filter.py` | 分析工具：翻譯 filter itemCode → zhTW 名稱 + 比對 sell protect |
+| `filter_analysis.json` | 分析結果（自動生成） |
+| `loot_filter.json` | 舊版遠端撿寶策略（v1.x 用，v2.1 已不讀取） |
+| `index.html` | 裝備名稱速查表（GitHub Pages） |
+
+## 🔧 parse_filter.py — Filter 分析工具
+
+解析 `d2r_official_filter.json`，對照 CASC `item-names.json`，輸出：
+
+1. **每條 hide rule 的 zhTW 物品清單** — itemCode → 中文名稱
+2. **正向比對** — sell.py protect 清單裡的物品是否被 filter 放行
+3. **反向比對** — filter 放行但 protect 沒覆蓋的物品（潛在風險）
+
+### 使用方式
+
+```bash
+# 前提：d2r-pixelbot repo 在同目錄下（需要 CASC item-names.json）
+cd d2r-loot-config
+python parse_filter.py
+```
+
+### 更新流程
+
+1. 遊戲內調整 Filter → Export/Copy 到 `d2r_official_filter.json`
+2. `git push`
+3. 跑 `python parse_filter.py`
+4. 看有沒有 ⚠️ 缺口 → 有的話更新 `d2r-pixelbot/bot/sell.py` 的 protect 清單
 
 ## JSON 欄位說明
 
@@ -68,9 +101,9 @@ Bot 每輪 run 開始前會從此 repo 的 `loot_filter.json` 讀取最新設定
 whitelist 可用值（未來擴充）：
 `ring`, `amulet`, `gloves`, `boots`, `circlet`, `belt`, `armor`, `weapon`, `helm`, `shield`
 
-### sell_by_color
+### sell_by_color（v2.1 已不使用）
 
-控制哪些顏色的物品要賣掉。黃色珠寶/戒指/護身符透過 template matching 保護不賣。
+> ⚠️ v2.1 起賣出邏輯 hardcoded in `sell.py`：灰/藍/白 賣，黃/金/綠/橘 不賣。
 
 ### kill_switch 緊急開關
 
@@ -95,106 +128,53 @@ Bot 會跳過所有撿寶，只做 run（殺怪 + 存檔），不撿任何東西
 
 ---
 
-## ⚠️ 保護清單設計指南（重要！）
+## ⚠️ 賣出保護架構（v2.1）
 
-> **2026-03-06 實戰教訓：無瑕寶石被賣掉事件**
-
-### 事件經過
-
-Bot 撿了無瑕綠寶石，但回城賣物時被賣掉了。
-
-**白色 pickup names 裡有「寶石」，為什麼沒保護到？**
-
-因為 OCR 把「無瑕綠**寶**石」讀成「無瑕綠**賓**石」。`"寶石" in "無瑕綠賓石"` → ❌。
-
-### 保護機制原理
+### 三層保護機制
 
 ```
-物品 hover → 「出售價格」template match → 判定顏色（灰/白/藍/黃）
-→ OCR 讀取物品名稱
-→ 用 pickup.{判定顏色}.names + sell_protect 做保護清單
-→ 保護清單裡任何一個詞 in OCR 讀到的名稱 → 🛡 不賣
-→ 沒匹配到 → 💰 賣掉
+物品 hover → 「出售價格」template match → 判定顏色
+    │
+    ├─ 黃/金/綠/橘 → 🛡 第一層：顏色直接保護（絕不賣）
+    │
+    └─ 灰/藍/白 → 第二層：OCR 讀 tooltip 上下文
+         │         （出售價格上方 120px + 下方 46px）
+         │
+         ├─ OCR 匹配 protect 關鍵字 → 🛡 不賣
+         ├─ OCR misread → 第三層：自動修正（寶→賓/實）→ 再比對
+         └─ 都沒匹配 → 💰 賣掉
 ```
 
-### 三個容易踩的坑
+### Hardcoded Protect 清單（sell.py）
 
-#### 坑 1：OCR 誤讀
-EasyOCR 在 D2R 小字體上常見誤讀：
+| 顏色 | 保護關鍵字 |
+|------|-----------|
+| **yellow** | *(整個顏色不賣，官方 filter 已篩選)* |
+| **blue** | 珠寶/珠實/珠賓/咒符/鑲孔 |
+| **white** | 活力藥水/全方位活力藥水/寶石/賓石/無瑕 + 符文之語底材（爪/盾/斧/劍/頭盔） |
+| **gray** | 骸骨魔杖/君主盾/法師鎧甲/統御者鎧甲 + 符文之語底材（同 white） |
 
-| 正確 | OCR 讀成 | 影響 |
-|------|---------|------|
-| 寶石 | 賓石、實石 | 「寶石」匹配失敗 |
-| 長劍 | 長釗 | 劍類匹配失敗 |
-| 闊劍 | 闊釗 | 同上 |
+### 容易踩的坑
 
-**解法：多個關鍵字冗餘覆蓋。** 「寶石」匹配不到？靠「無瑕」或「瑕疵」當備援。
+| 坑 | 解法 |
+|----|------|
+| OCR 誤讀（寶→賓/實） | `OCR_MISREAD_MAP` 自動修正 + 多關鍵字冗餘 |
+| 灰白色判定邊界 | 灰色和白色放同樣的保護詞 |
+| 匹配方向 | `保護詞 in OCR名稱`，「無瑕」和「瑕疵」都要放 |
+| OCR crop 位置 | 上方 120px + 下方 46px 雙向讀取 |
+| 黃色戒指被賣（2026-03-12） | 根本解：黃色從 SELL_COLORS 移除 |
 
-#### 坑 2：灰白色判定邊界
-Bot 根據「出售價格」文字亮度判定灰色 vs 白色：
-- 灰色 ≈ 73 brightness
-- 白色 ≈ 150 brightness
-- 閾值 = 110
+### Debug：物品被意外賣掉
 
-便宜白色物品（如寶石）亮度偏低（131-144），偶爾可能被判成灰色。
+1. 看 log `📖 OCR 讀到:` — OCR 讀到什麼
+2. 看 `灰/白消歧義: brightness=XXX` — 顏色判對嗎
+3. 看有沒有 `🛡 OCR 保護:` — 有=成功，沒有=匹配失敗
+4. 用 `test_sell.py` 模式 7 看 OCR 框框位置
+5. 用 `test_sell.py` 模式 8 (dry run) 模擬完整流程
 
-**解法：灰色和白色的 names 都要放同樣的保護詞。**
+### 維護流程
 
-```json
-"gray": { "names": ["...", "無瑕", "瑕疵", "寶石"] },
-"white": { "names": ["...", "無瑕", "瑕疵", "寶石"] }
-```
-
-#### 坑 3：匹配方向
-規則是 `保護詞 in OCR讀到的名稱`：
-- ✅ `"無瑕" in "無瑕綠寶石"` → 匹配！
-- ❌ `"瑕疵" in "無瑕綠寶石"` → 不匹配（「瑕疵」≠「瑕」，多一個字）
-- ✅ `"瑕疵" in "瑕疵紅寶石"` → 匹配！
-
-**所以「瑕疵」只保護瑕疵級寶石，「無瑕」只保護無瑕級寶石，兩個都要放！**
-
-### 設計保護詞的 Checklist
-
-編輯 `loot_filter.json` 前，確認：
-
-- [ ] 保護詞是物品名稱的**子字串**嗎？（`pname in item_name` 方向）
-- [ ] 有沒有**多層冗餘**？（OCR 讀錯一個詞還有別的能救）
-- [ ] **灰色和白色**都放了嗎？（灰白判定可能出錯）
-- [ ] 2 個字的短詞有沒有搭配更長的詞做**備援**？
-- [ ] 用 `test_sell.py` 模式 8 (OCR dry run) **實測過**嗎？
-
-### 當前保護詞範例
-
-**寶石（三重保護）：**
-```
-「無瑕」→ 保護無瑕XX寶石 ✅
-「瑕疵」→ 保護瑕疵XX寶石 ✅  
-「寶石」→ 保護所有寶石（OCR 讀對的話）✅
-三個詞同時放在 gray + white names 裡
-```
-
-**藍色裝備：**
-```
-「珠寶」→ 保護藍色珠寶 ✅
-「咒符」→ 保護藍色咒符 ✅
-```
-
-**黃色裝備（全撿 names: "*"）：**
-```
-sell_protect 裡放手套/靴子/戒指/護身符/珠寶名稱
-黃色其他裝備 → 全部賣掉（接受風險）
-```
-
-> ⚠️ **2026-03-07 教訓：** v1.7 從 template matching 換成 OCR 時，
-> 舊的 `protect_ring.png`、`protect_jewel.png`、`protect_amulet.png` 被移除，
-> 但忘了把「戒指」「護身符」「珠寶」加進 `sell_protect`，導致黃色戒指被賣掉。
-> **遷移保護機制時，務必確認所有舊保護項都有對應到新機制。**
-
-### Debug：物品被意外賣掉怎麼辦？
-
-1. 看 bot log 的 `📖 OCR 讀到:` — OCR 到底讀到什麼
-2. 看 `灰/白消歧義: brightness=XXX → white/gray` — 顏色判對了嗎
-3. 看有沒有 `🛡 OCR 保護:` — 有=保護成功，沒有=匹配失敗
-4. 確認 `pickup.{顏色}.names` 裡有沒有能匹配的詞
-5. 如果是新的 OCR 誤讀 → 加入更多保護詞做冗餘
-6. 灰白判錯 → 兩邊都加保護詞
+1. 遊戲內調 filter → copy 到 `d2r_official_filter.json` → push
+2. 跑 `python parse_filter.py`
+3. 看反向檢查有沒有 ⚠️ 缺口
+4. 有缺口 → 更新 `d2r-pixelbot/bot/sell.py` 的 protect 清單
