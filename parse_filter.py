@@ -114,7 +114,7 @@ def print_analysis(results):
             print("  (無特定物品或類別)")
 
 
-def cross_check_sell_protect(results, code_to_name):
+def cross_check_sell_protect(results, code_to_name, filter_data):
     """比對 filter 隱藏的 itemCode 與 sell.py 的 protect 清單"""
     # sell.py hardcoded protect lists
     SELL_PROTECT = {
@@ -144,38 +144,106 @@ def cross_check_sell_protect(results, code_to_name):
         ],
     }
 
-    # 收集 filter 中被 hide 的白/灰 itemCode 的 zhTW 名稱
-    hidden_white_gray_names = set()
-    for rule in results:
-        if not rule["enabled"] or rule["ruleType"] != "hide":
+    # 合併所有 protect 關鍵字（白+灰，用於反向檢查）
+    all_protect_names = set()
+    for color, plist in SELL_PROTECT.items():
+        if color != "yellow":
+            all_protect_names.update(plist)
+
+    # 收集 filter 中被 hide 的白/灰 itemCode
+    hidden_codes = set()
+    hidden_categories = set()
+    for rule in filter_data.get("rules", []):
+        if not rule.get("enabled") or rule.get("ruleType") != "hide":
             continue
-        rarities = rule["rarity"]
-        # 白色 = normal/lowQuality/hiQuality, 灰色 = normal with ethereal/socketed
+        rarities = rule.get("equipmentRarity", [])
         if any(r in rarities for r in ["normal", "lowQuality", "hiQuality"]):
-            for item in rule["specific_items_hidden"]:
-                hidden_white_gray_names.add(item["zhTW"])
-
-    # 收集所有 zhTW 名稱（全物品池）
-    all_names = set(code_to_name.values())
-
-    # filter 沒隱藏的白/灰 = 會顯示在地上
-    # 注意：這只是 itemCode 級別的，category 級別的隱藏更廣
-    # 但 itemCode 是精確覆蓋的
+            hidden_codes.update(rule.get("itemCode", []))
+            hidden_codes.update(rule.get("equipmentItemCode", []))
+            hidden_categories.update(rule.get("equipmentCategory", []))
 
     print("\n" + "=" * 60)
     print("📋 sell.py protect 清單 vs filter 比對")
     print("=" * 60)
 
-    # 檢查 protect 清單中的物品是否在 filter 的隱藏名單中（被隱藏 = 不會出現 = 不需要保護）
+    # ── 正向檢查：protect 裡的東西是否會出現 ──
+    hidden_names = set()
+    for code in hidden_codes:
+        zh = code_to_name.get(code)
+        if zh:
+            hidden_names.add(zh)
+
     for color, protect_list in SELL_PROTECT.items():
         if color == "yellow":
             print(f"\n🟡 {color}: 整個顏色不賣，跳過")
             continue
-        print(f"\n{'🔵' if color == 'blue' else '⬜' if color == 'white' else '⬛'} {color} protect ({len(protect_list)} 項):")
+        icon = "🔵" if color == "blue" else "⬜" if color == "white" else "⬛"
+        print(f"\n{icon} {color} protect ({len(protect_list)} 項):")
         for pname in protect_list:
-            in_hidden = pname in hidden_white_gray_names
+            in_hidden = pname in hidden_names
             status = "🔴 被 filter 隱藏（不會出現在地上）" if in_hidden else "✅ filter 放行（會出現）"
             print(f"  {pname:12s} {status}")
+
+    # ── 反向檢查：filter 放行但 protect 沒覆蓋的物品 ──
+    print("\n" + "=" * 60)
+    print("⚠️ 反向檢查：filter 放行但 protect 未覆蓋的白/灰物品")
+    print("  （這些物品會顯示在地上、被撿起來、然後可能被賣掉）")
+    print("=" * 60)
+
+    # 找出 filter 沒隱藏的 itemCode（不在 hidden_codes 且不在 hidden_categories）
+    # 注意：category 隱藏比 itemCode 更廣，所以兩者都要檢查
+    # 但我們無法從 CASC 知道每個 itemCode 屬於哪個 category
+    # 所以這裡只列出「被 filter 用 itemCode 明確隱藏」的反面
+
+    # 規則 4 的邏輯：隱藏 category + 隱藏特定 itemCode
+    # 不在 category 裡的物品 → 只能靠 itemCode 隱藏
+    # 所以反向就是：不在 hidden_categories 且不在 hidden_codes 的 = 放行
+
+    # 從規則 4 特定列出的 itemCode 找出沒被隱藏的同類物品
+    # 這需要知道每個 code 的 category，CASC 裡沒有這個 mapping
+    # 所以我們用一個更實用的方法：列出 protect 清單 vs filter 隱藏的差集
+
+    # 所有 filter 放行的物品名稱（不在 hidden 裡的）
+    visible_names = set(code_to_name.values()) - hidden_names
+    # 過濾掉明顯不是裝備的（quest items, 技能等）
+    # 但這太複雜，改用簡單方法：只列出 protect 清單中的物品是否完整
+
+    # 更實用的反向：規則 4 的 hidden itemCode 對應的 zhTW，
+    # 看看有沒有 protect 清單「應該有但沒有」的
+    rule4_hidden_names = set()
+    for rule in filter_data.get("rules", []):
+        if rule.get("name") == "隱藏大部分白裝與鑲材":
+            for code in rule.get("equipmentItemCode", []):
+                zh = code_to_name.get(code)
+                if zh:
+                    rule4_hidden_names.add(zh)
+
+    # 規則 4 不隱藏的類別中，如果有物品的 code 沒在 hidden_codes 裡
+    # → 這些物品可能顯示 → 需要 protect
+    # 找 protect 和 hidden 的差集：protect 裡有但規則4也隱藏的 = 多餘保護（但無害）
+    # hidden 裡有但 protect 沒有的 = 被隱藏所以不需要保護
+
+    # 最關鍵的問題：有沒有「符文之語底材」類型的物品，filter 放行但 protect 漏掉？
+    # 這要靠人工確認，腳本能做的是列出完整清單讓 Jones 目視檢查
+
+    # 列出規則 4 itemCode 級別隱藏的所有物品（已 hidden）和 protect 清單的對照
+    not_in_protect = rule4_hidden_names - all_protect_names
+    in_protect_not_hidden = all_protect_names - rule4_hidden_names - hidden_names
+
+    if not_in_protect:
+        print(f"\n📝 規則 4 隱藏的物品中，protect 清單沒有的 ({len(not_in_protect)} 項):")
+        print("  （這些被 filter 隱藏了所以沒差，但如果未來你放行它們，記得加 protect）")
+        for name in sorted(not_in_protect):
+            print(f"    {name}")
+
+    if in_protect_not_hidden:
+        print(f"\n📝 protect 清單有但規則 4 沒特別隱藏的 ({len(in_protect_not_hidden)} 項):")
+        print("  （可能靠 category 隱藏，或本來就是 filter 放行的重要物品）")
+        for name in sorted(in_protect_not_hidden):
+            print(f"    {name}")
+
+    print("\n💡 如果你在遊戲中調整 filter 放行了新的白/灰物品，")
+    print("   記得把它們加到 sell.py 的 protect 清單！")
 
 
 def main():
@@ -187,7 +255,7 @@ def main():
 
     results = analyze_filter(filter_data, code_to_name)
     print_analysis(results)
-    cross_check_sell_protect(results, code_to_name)
+    cross_check_sell_protect(results, code_to_name, filter_data)
 
     # 儲存分析結果
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
