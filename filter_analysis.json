@@ -1,0 +1,800 @@
+[
+  {
+    "name": "隱藏爛藥水鑰匙卷軸彈藥",
+    "enabled": true,
+    "ruleType": "hide",
+    "rarity": [
+      "normal"
+    ],
+    "quality": [],
+    "categories_hidden": [],
+    "itemCategory_hidden": [
+      "ammo",
+      "scrlt",
+      "keysr"
+    ],
+    "filterEtherealSocketed": false,
+    "specific_items_hidden": [
+      {
+        "code": "hp2",
+        "zhTW": "輕效生命藥水"
+      },
+      {
+        "code": "mp3",
+        "zhTW": "法力藥水"
+      },
+      {
+        "code": "wms",
+        "zhTW": "融冰藥水"
+      },
+      {
+        "code": "mp4",
+        "zhTW": "強效法力藥水"
+      },
+      {
+        "code": "hp5",
+        "zhTW": "特效生命藥水"
+      },
+      {
+        "code": "hp1",
+        "zhTW": "弱效生命藥水"
+      },
+      {
+        "code": "hp4",
+        "zhTW": "強效生命藥水"
+      },
+      {
+        "code": "mp1",
+        "zhTW": "弱效法力藥水"
+      },
+      {
+        "code": "mp5",
+        "zhTW": "特效法力藥水"
+      },
+      {
+        "code": "mp2",
+        "zhTW": "輕效法力藥水"
+      },
+      {
+        "code": "yps",
+        "zhTW": "解毒藥水"
+      },
+      {
+        "code": "vps",
+        "zhTW": "精力藥水"
+      },
+      {
+        "code": "hp3",
+        "zhTW": "生命藥水"
+      }
+    ],
+    "unresolved_codes": [],
+    "total_codes": 13,
+    "resolved_count": 13
+  },
+  {
+    "name": "隱藏大部分藍裝",
+    "enabled": true,
+    "ruleType": "hide",
+    "rarity": [
+      "magic"
+    ],
+    "quality": [
+      "normal",
+      "exceptional",
+      "elite"
+    ],
+    "categories_hidden": [
+      "bows",
+      "palad",
+      "warlo",
+      "maces",
+      "belts",
+      "helms",
+      "stave",
+      "axes",
+      "druid",
+      "throw",
+      "amule",
+      "sorce",
+      "amazo",
+      "glove",
+      "poles",
+      "daggs",
+      "necro",
+      "barbh",
+      "shlds",
+      "armor",
+      "xbows",
+      "scept",
+      "javel",
+      "spear",
+      "rings",
+      "boots",
+      "sword",
+      "assas"
+    ],
+    "itemCategory_hidden": [],
+    "filterEtherealSocketed": false,
+    "specific_items_hidden": [
+      {
+        "code": "ywn",
+        "zhTW": "紫杉魔杖"
+      },
+      {
+        "code": "ci0",
+        "zhTW": "頭環"
+      },
+      {
+        "code": "9yw",
+        "zhTW": "石木魔杖"
+      },
+      {
+        "code": "wnd",
+        "zhTW": "魔杖"
+      },
+      {
+        "code": "9bw",
+        "zhTW": "古墓魔杖"
+      },
+      {
+        "code": "9wn",
+        "zhTW": "焦木魔杖"
+      },
+      {
+        "code": "gwn",
+        "zhTW": "陰森魔杖"
+      },
+      {
+        "code": "9gw",
+        "zhTW": "墓地魔杖"
+      },
+      {
+        "code": "ci1",
+        "zhTW": "寶冠"
+      },
+      {
+        "code": "bwn",
+        "zhTW": "骸骨魔杖"
+      }
+    ],
+    "unresolved_codes": [],
+    "total_codes": 10,
+    "resolved_count": 10
+  },
+  {
+    "name": "隱藏大部分黃裝",
+    "enabled": true,
+    "ruleType": "hide",
+    "rarity": [
+      "rare"
+    ],
+    "quality": [
+      "normal",
+      "exceptional",
+      "elite"
+    ],
+    "categories_hidden": [
+      "bows",
+      "palad",
+      "maces",
+      "helms",
+      "belts",
+      "stave",
+      "axes",
+      "druid",
+      "throw",
+      "amazo",
+      "poles",
+      "daggs",
+      "necro",
+      "armor",
+      "shlds",
+      "barbh",
+      "xbows",
+      "scept",
+      "javel",
+      "spear",
+      "sword",
+      "assas"
+    ],
+    "itemCategory_hidden": [],
+    "filterEtherealSocketed": false,
+    "specific_items_hidden": [
+      {
+        "code": "lgl",
+        "zhTW": "皮革手套"
+      },
+      {
+        "code": "oba",
+        "zhTW": "渦流水晶"
+      },
+      {
+        "code": "9wn",
+        "zhTW": "焦木魔杖"
+      },
+      {
+        "code": "gwn",
+        "zhTW": "陰森魔杖"
+      },
+      {
+        "code": "hbt",
+        "zhTW": "護脛"
+      },
+      {
+        "code": "wa2",
+        "zhTW": "秘典"
+      },
+      {
+        "code": "bwn",
+        "zhTW": "骸骨魔杖"
+      },
+      {
+        "code": "wa5",
+        "zhTW": "魔典"
+      },
+      {
+        "code": "tgl",
+        "zhTW": "輕型護手"
+      },
+      {
+        "code": "wa1",
+        "zhTW": "舊書"
+      },
+      {
+        "code": "wa3",
+        "zhTW": "寶典"
+      },
+      {
+        "code": "ob2",
+        "zhTW": "神聖天球"
+      },
+      {
+        "code": "ob3",
+        "zhTW": "攏煙之球"
+      },
+      {
+        "code": "wnd",
+        "zhTW": "魔杖"
+      },
+      {
+        "code": "9bw",
+        "zhTW": "古墓魔杖"
+      },
+      {
+        "code": "ob6",
+        "zhTW": "靈光法珠"
+      },
+      {
+        "code": "ob8",
+        "zhTW": "雲霧之球"
+      },
+      {
+        "code": "wa4",
+        "zhTW": "綱要"
+      },
+      {
+        "code": "9gw",
+        "zhTW": "墓地魔杖"
+      },
+      {
+        "code": "ob5",
+        "zhTW": "傑瑞德之石"
+      },
+      {
+        "code": "ob7",
+        "zhTW": "水晶天球"
+      },
+      {
+        "code": "vgl",
+        "zhTW": "厚皮手套"
+      },
+      {
+        "code": "9yw",
+        "zhTW": "石木魔杖"
+      },
+      {
+        "code": "ob4",
+        "zhTW": "握扣法珠"
+      },
+      {
+        "code": "mbt",
+        "zhTW": "鎖鍊靴"
+      },
+      {
+        "code": "ob1",
+        "zhTW": "鷹之法珠"
+      },
+      {
+        "code": "mgl",
+        "zhTW": "鍊甲手套"
+      },
+      {
+        "code": "vbt",
+        "zhTW": "重靴"
+      },
+      {
+        "code": "ywn",
+        "zhTW": "紫杉魔杖"
+      },
+      {
+        "code": "hgl",
+        "zhTW": "鋼鐵護手"
+      },
+      {
+        "code": "ob9",
+        "zhTW": "閃耀之球"
+      },
+      {
+        "code": "tbt",
+        "zhTW": "輕鎧靴"
+      },
+      {
+        "code": "lbt",
+        "zhTW": "皮靴"
+      }
+    ],
+    "unresolved_codes": [],
+    "total_codes": 33,
+    "resolved_count": 33
+  },
+  {
+    "name": "隱藏大部分白裝與鑲材",
+    "enabled": true,
+    "ruleType": "hide",
+    "rarity": [
+      "lowQuality",
+      "hiQuality",
+      "normal"
+    ],
+    "quality": [
+      "normal",
+      "exceptional",
+      "elite"
+    ],
+    "categories_hidden": [
+      "bows",
+      "warlo",
+      "maces",
+      "belts",
+      "stave",
+      "wands",
+      "axes",
+      "druid",
+      "throw",
+      "sorce",
+      "amazo",
+      "glove",
+      "daggs",
+      "necro",
+      "armor",
+      "shlds",
+      "barbh",
+      "xbows",
+      "scept",
+      "javel",
+      "spear",
+      "boots"
+    ],
+    "itemCategory_hidden": [],
+    "filterEtherealSocketed": true,
+    "specific_items_hidden": [
+      {
+        "code": "scy",
+        "zhTW": "鐮刀"
+      },
+      {
+        "code": "9b9",
+        "zhTW": "哥德劍"
+      },
+      {
+        "code": "hlm",
+        "zhTW": "頭盔"
+      },
+      {
+        "code": "9sm",
+        "zhTW": "水手刀"
+      },
+      {
+        "code": "7bs",
+        "zhTW": "征服之劍"
+      },
+      {
+        "code": "xh9",
+        "zhTW": "陰森頭盔"
+      },
+      {
+        "code": "9cm",
+        "zhTW": "達西安長刀"
+      },
+      {
+        "code": "btl",
+        "zhTW": "刃爪"
+      },
+      {
+        "code": "7wb",
+        "zhTW": "腕劍"
+      },
+      {
+        "code": "msk",
+        "zhTW": "面具"
+      },
+      {
+        "code": "wsd",
+        "zhTW": "征戰劍"
+      },
+      {
+        "code": "9ls",
+        "zhTW": "符文劍"
+      },
+      {
+        "code": "xkp",
+        "zhTW": "便盔"
+      },
+      {
+        "code": "skr",
+        "zhTW": "剪刃"
+      },
+      {
+        "code": "uap",
+        "zhTW": "軍帽"
+      },
+      {
+        "code": "pa4",
+        "zhTW": "艾文之盾"
+      },
+      {
+        "code": "9vo",
+        "zhTW": "長柄鍥"
+      },
+      {
+        "code": "ukp",
+        "zhTW": "多頭蛇顱盔"
+      },
+      {
+        "code": "sbr",
+        "zhTW": "軍刀"
+      },
+      {
+        "code": "ci0",
+        "zhTW": "頭環"
+      },
+      {
+        "code": "9fc",
+        "zhTW": "印度彎刀"
+      },
+      {
+        "code": "7cm",
+        "zhTW": "高地劍"
+      },
+      {
+        "code": "xhl",
+        "zhTW": "輕盔"
+      },
+      {
+        "code": "bsw",
+        "zhTW": "重劍"
+      },
+      {
+        "code": "ulm",
+        "zhTW": "覆頰盔"
+      },
+      {
+        "code": "bsd",
+        "zhTW": "闊劍"
+      },
+      {
+        "code": "ktr",
+        "zhTW": "拳刃"
+      },
+      {
+        "code": "7qr",
+        "zhTW": "穿擊剪刃"
+      },
+      {
+        "code": "bar",
+        "zhTW": "月牙砍刀"
+      },
+      {
+        "code": "7gs",
+        "zhTW": "炎魔之刃"
+      },
+      {
+        "code": "9qr",
+        "zhTW": "格鬥剪刃"
+      },
+      {
+        "code": "pax",
+        "zhTW": "長柄斧"
+      },
+      {
+        "code": "pa2",
+        "zhTW": "輕圓盾"
+      },
+      {
+        "code": "9gd",
+        "zhTW": "處刑劍"
+      },
+      {
+        "code": "2hs",
+        "zhTW": "雙手劍"
+      },
+      {
+        "code": "9h9",
+        "zhTW": "渡鴉喙"
+      },
+      {
+        "code": "92h",
+        "zhTW": "雙手重劍"
+      },
+      {
+        "code": "7lw",
+        "zhTW": "蠻獸爪"
+      },
+      {
+        "code": "vou",
+        "zhTW": "槍斧"
+      },
+      {
+        "code": "gsd",
+        "zhTW": "巨劍"
+      },
+      {
+        "code": "9fb",
+        "zhTW": "日耳曼大劍"
+      },
+      {
+        "code": "axf",
+        "zhTW": "斧手"
+      },
+      {
+        "code": "ces",
+        "zhTW": "刃拳"
+      },
+      {
+        "code": "lsd",
+        "zhTW": "長劍"
+      },
+      {
+        "code": "9wd",
+        "zhTW": "上古劍"
+      },
+      {
+        "code": "pa5",
+        "zhTW": "冠冕之盾"
+      },
+      {
+        "code": "7tw",
+        "zhTW": "符紋爪"
+      },
+      {
+        "code": "flb",
+        "zhTW": "焰形劍"
+      },
+      {
+        "code": "7cs",
+        "zhTW": "戰鬥刃拳"
+      },
+      {
+        "code": "9cs",
+        "zhTW": "手鐮"
+      },
+      {
+        "code": "clw",
+        "zhTW": "爪"
+      },
+      {
+        "code": "uhl",
+        "zhTW": "巨螺盔"
+      },
+      {
+        "code": "7b7",
+        "zhTW": "豪傑大劍"
+      },
+      {
+        "code": "gis",
+        "zhTW": "大劍"
+      },
+      {
+        "code": "wrb",
+        "zhTW": "腕刃"
+      },
+      {
+        "code": "xap",
+        "zhTW": "戰帽"
+      },
+      {
+        "code": "7xf",
+        "zhTW": "征戰拳套"
+      },
+      {
+        "code": "7ss",
+        "zhTW": "法卡塔劍"
+      },
+      {
+        "code": "72h",
+        "zhTW": "傳說劍"
+      },
+      {
+        "code": "wsc",
+        "zhTW": "征戰鐮刀"
+      },
+      {
+        "code": "xlm",
+        "zhTW": "兜盔"
+      },
+      {
+        "code": "9xf",
+        "zhTW": "格鬥爪"
+      },
+      {
+        "code": "7wd",
+        "zhTW": "秘儀劍"
+      },
+      {
+        "code": "ghm",
+        "zhTW": "重盔"
+      },
+      {
+        "code": "clm",
+        "zhTW": "闊刃大劍"
+      },
+      {
+        "code": "9b7",
+        "zhTW": "鉤斧"
+      },
+      {
+        "code": "7ls",
+        "zhTW": "絕秘劍"
+      },
+      {
+        "code": "xhm",
+        "zhTW": "翼盔"
+      },
+      {
+        "code": "9sb",
+        "zhTW": "波斯彎刀"
+      },
+      {
+        "code": "hal",
+        "zhTW": "長戟"
+      },
+      {
+        "code": "uhm",
+        "zhTW": "巨角頭盔"
+      },
+      {
+        "code": "9wb",
+        "zhTW": "腕刺"
+      },
+      {
+        "code": "9ss",
+        "zhTW": "羅馬短劍"
+      },
+      {
+        "code": "9pa",
+        "zhTW": "闊頭槍"
+      },
+      {
+        "code": "7fc",
+        "zhTW": "多頭蛇刃"
+      },
+      {
+        "code": "7ar",
+        "zhTW": "穿擊拳刃"
+      },
+      {
+        "code": "7gd",
+        "zhTW": "巨神刃"
+      },
+      {
+        "code": "9bs",
+        "zhTW": "戰鬥長劍"
+      },
+      {
+        "code": "pa1",
+        "zhTW": "小盾"
+      },
+      {
+        "code": "fhl",
+        "zhTW": "全罩盔"
+      },
+      {
+        "code": "scm",
+        "zhTW": "彎刀"
+      },
+      {
+        "code": "9ar",
+        "zhTW": "格鬥刃"
+      },
+      {
+        "code": "pa3",
+        "zhTW": "紋章盾"
+      },
+      {
+        "code": "cap",
+        "zhTW": "便帽"
+      },
+      {
+        "code": "9cr",
+        "zhTW": "次元刃"
+      },
+      {
+        "code": "7sb",
+        "zhTW": "典雅彎刀"
+      },
+      {
+        "code": "pa8",
+        "zhTW": "守護之盾"
+      },
+      {
+        "code": "ci1",
+        "zhTW": "寶冠"
+      },
+      {
+        "code": "crn",
+        "zhTW": "王冠"
+      },
+      {
+        "code": "flc",
+        "zhTW": "彎刃大刀"
+      },
+      {
+        "code": "9s8",
+        "zhTW": "戰鬥鐮刀"
+      },
+      {
+        "code": "9wc",
+        "zhTW": "陰森鐮刀"
+      },
+      {
+        "code": "bhm",
+        "zhTW": "骸骨頭盔"
+      },
+      {
+        "code": "skp",
+        "zhTW": "顱帽"
+      },
+      {
+        "code": "7fb",
+        "zhTW": "巨神劍"
+      },
+      {
+        "code": "9gs",
+        "zhTW": "長牙劍"
+      },
+      {
+        "code": "ssd",
+        "zhTW": "短劍"
+      },
+      {
+        "code": "7sm",
+        "zhTW": "土耳其彎刀"
+      }
+    ],
+    "unresolved_codes": [],
+    "total_codes": 98,
+    "resolved_count": 98
+  },
+  {
+    "name": "隱藏低階綠裝",
+    "enabled": true,
+    "ruleType": "hide",
+    "rarity": [
+      "set"
+    ],
+    "quality": [
+      "normal"
+    ],
+    "categories_hidden": [
+      "armo",
+      "weap"
+    ],
+    "itemCategory_hidden": [],
+    "filterEtherealSocketed": false,
+    "specific_items_hidden": [],
+    "unresolved_codes": [],
+    "total_codes": 0,
+    "resolved_count": 0
+  }
+]
