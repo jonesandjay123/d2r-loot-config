@@ -40,8 +40,8 @@ D2R 遊戲內官方 Filter
 | `d2r_official_filter.json` | 遊戲內官方 Filter 設定備份（從遊戲 copy 出來） |
 | `parse_filter.py` | 分析工具：翻譯 filter itemCode → zhTW 名稱 + 比對 sell protect |
 | `filter_analysis.json` | 分析結果（自動生成） |
-| `loot_filter.json` | 舊版遠端撿寶策略（v1.x 用，v2.1 已不讀取） |
 | `index.html` | 裝備名稱速查表（GitHub Pages） |
+| `.gitignore` | 排除自動生成的 `filter_analysis.json` |
 
 ## 🔧 parse_filter.py — Filter 分析工具
 
@@ -66,64 +66,10 @@ python parse_filter.py
 3. 跑 `python parse_filter.py`
 4. 看有沒有 ⚠️ 缺口 → 有的話更新 `d2r-pixelbot/bot/sell.py` 的 protect 清單
 
-## JSON 欄位說明
-
-### 頂層
-
-| 欄位 | 說明 |
-|------|------|
-| `version` | 版本號，方便 debug 確認 bot 用到哪個版本 |
-| `kill_switch` | `true` = 停止所有撿寶（安全開關） |
-
-### pickup_by_color
-
-控制哪些顏色的物品要撿：
-
-| 顏色 | 說明 | 遊戲內顯示 |
-|------|------|-----------|
-| `gold` | 暗金（Unique） | 🟤 深金色 |
-| `green` | 套裝（Set） | 🟢 綠色 |
-| `orange` | 符文/工藝（Rune/Crafted） | 🟠 橘色 |
-| `yellow` | 稀有（Rare） | 🟡 黃色 |
-| `blue_special` | 藍色符咒/珠寶 | 🔵 藍色（特殊） |
-| `white_special` | 活力藥水/寶石 | ⚪ 白色（特殊） |
-
-### yellow.filter
-
-黃色物品的進階過濾：
-
-| mode | 效果 |
-|------|------|
-| `all` | 撿所有黃色物品 |
-| `whitelist` | 只撿 `whitelist` 清單內的類別 |
-| `none` | 完全不撿黃色 |
-
-whitelist 可用值（未來擴充）：
-`ring`, `amulet`, `gloves`, `boots`, `circlet`, `belt`, `armor`, `weapon`, `helm`, `shield`
-
-### sell_by_color（v2.1 已不使用）
-
-> ⚠️ v2.1 起賣出邏輯 hardcoded in `sell.py`：灰/藍/白 賣，黃/金/綠/橘 不賣。
-
-### kill_switch 緊急開關
-
-如果你手滑改壞 JSON 或想立刻停止撿寶：
-```json
-"kill_switch": true
-```
-Bot 會跳過所有撿寶，只做 run（殺怪 + 存檔），不撿任何東西。
-
 ## 注意事項
 
-- ⚠️ JSON 格式錯誤時 bot 會 fallback 到本地設定，不會崩潰
 - ⚠️ 不要在此 repo 放任何私人資訊（路徑、IP、帳號、截圖）
-- 版本號建議每次修改 +1，方便追蹤
-
-## 未來規劃
-
-- [ ] Phase 2: 物品名稱白名單（利用 CASC zhTW 字典）
-- [ ] Phase 3: OCR 文字辨識 + fuzzy match
-- [ ] Phase 4: 手機友善的編輯 UI
+- `filter_analysis.json` 是自動生成的，已加入 `.gitignore`
 
 
 ---
