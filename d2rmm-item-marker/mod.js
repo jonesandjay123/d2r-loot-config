@@ -1,6 +1,6 @@
 /**
  * Bot Item Marker — 在物品名稱後加上紫色§標記
- * 涵蓋所有物品相關的名稱檔案
+ * 只改三個檔案：物品名、符文名、修飾詞（世界之石碎片等）
  */
 
 const LANGUAGES = [
@@ -8,11 +8,9 @@ const LANGUAGES = [
   "frFR", "itIT", "jaJP", "koKR", "plPL", "ptBR", "ruRU"
 ];
 
-// 所有可能包含物品名稱的檔案
 const FILES = [
   "local/lng/strings/item-names.json",
   "local/lng/strings/item-runes.json",
-  "local/lng/strings/item-nameaffixes.json",
   "local/lng/strings/item-modifiers.json",
 ];
 
