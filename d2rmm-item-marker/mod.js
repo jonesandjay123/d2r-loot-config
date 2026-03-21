@@ -1,6 +1,6 @@
 /**
  * Bot Item Marker — 在物品名稱後加上紫色§標記
- * 只改三個檔案：物品名、符文名、修飾詞
+ * 只改兩個檔案：物品名 + 符文名（不動 modifiers 避免汙染 UI）
  */
 
 const LANGUAGES = [
@@ -11,7 +11,6 @@ const LANGUAGES = [
 const FILES = [
   "local/lng/strings/item-names.json",
   "local/lng/strings/item-runes.json",
-  "local/lng/strings/item-modifiers.json",
 ];
 
 for (const filePath of FILES) {
