@@ -16,18 +16,22 @@ const LANGUAGES = [
   "frFR", "itIT", "jaJP", "koKR", "plPL", "ptBR", "ruRU"
 ];
 
-// 讀取物品名稱表
-const itemNames = D2RMM.readJson("data\\local\\lng\\strings\\item-names.json");
+// 讀取物品名稱表（用正斜線）
+const filePath = "data/local/lng/strings/item-names.json";
+const itemNames = D2RMM.readJson(filePath);
 
-// 遍歷每個物品，加上標記
-for (const entry of itemNames) {
-  for (const lang of LANGUAGES) {
-    if (entry[lang]) {
-      // 前面加彩色標記 + 重置色，後面加彩色標記
-      entry[lang] = `${color}${left}${reset} ${entry[lang]} ${color}${right}`;
+if (itemNames == null) {
+  D2RMM.error("無法讀取 " + filePath);
+} else {
+  // 遍歷每個物品，加上標記
+  for (const entry of itemNames) {
+    for (const lang of LANGUAGES) {
+      if (entry[lang]) {
+        entry[lang] = color + left + reset + " " + entry[lang] + " " + color + right;
+      }
     }
   }
-}
 
-// 寫回
-D2RMM.writeJson("data\\local\\lng\\strings\\item-names.json", itemNames);
+  // 寫回
+  D2RMM.writeJson(filePath, itemNames);
+}
