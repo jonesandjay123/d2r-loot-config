@@ -1,10 +1,7 @@
 /**
  * Bot Item Marker — 在物品名稱前加上紫色§標記
+ * 物品名本身保持原色（暗金/綠/藍等不受影響）
  */
-
-const color = "ÿc;";    // 紫色
-const symbol = "§";
-const reset = "ÿc0";    // 重置色
 
 const LANGUAGES = [
   "enUS", "zhTW", "zhCN", "deDE", "esES", "esMX",
@@ -20,7 +17,8 @@ if (itemNames == null) {
   for (const entry of itemNames) {
     for (const lang of LANGUAGES) {
       if (entry[lang]) {
-        entry[lang] = color + symbol + reset + " " + entry[lang];
+        // 紫色§ + 空格 + 原本物品名（不加 reset，讓物品保持原色）
+        entry[lang] = "ÿc;" + "§" + " " + entry[lang];
       }
     }
   }
