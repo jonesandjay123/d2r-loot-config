@@ -1,6 +1,6 @@
 /**
- * Bot Item Marker — 在物品名稱後面加上紫色§標記
- * §放後面，不影響物品原本顏色
+ * Bot Item Marker — 在物品名稱後加上紫色§標記
+ * 涵蓋所有物品相關的名稱檔案
  */
 
 const LANGUAGES = [
@@ -8,19 +8,31 @@ const LANGUAGES = [
   "frFR", "itIT", "jaJP", "koKR", "plPL", "ptBR", "ruRU"
 ];
 
-const filePath = "local/lng/strings/item-names.json";
-const itemNames = D2RMM.readJson(filePath);
+// 所有可能包含物品名稱的檔案
+const FILES = [
+  "local/lng/strings/item-names.json",
+  "local/lng/strings/item-runes.json",
+  "local/lng/strings/item-nameaffixes.json",
+  "local/lng/strings/item-modifiers.json",
+];
 
-if (itemNames == null) {
-  D2RMM.error("Cannot read " + filePath);
-} else {
-  for (const entry of itemNames) {
+for (const filePath of FILES) {
+  const data = D2RMM.readJson(filePath);
+  if (data == null) {
+    D2RMM.warn("Skipped (not found): " + filePath);
+    continue;
+  }
+  
+  let count = 0;
+  for (const entry of data) {
     for (const lang of LANGUAGES) {
-      if (entry[lang]) {
-        // 原本物品名 + 空格 + 紫色§（放後面不影響原色）
+      if (entry[lang] && !entry[lang].endsWith("§")) {
         entry[lang] = entry[lang] + " " + "ÿc;" + "§";
+        count++;
       }
     }
   }
-  D2RMM.writeJson(filePath, itemNames);
+  
+  D2RMM.writeJson(filePath, data);
+  D2RMM.info("Modified " + filePath + " (" + count + " entries)");
 }
