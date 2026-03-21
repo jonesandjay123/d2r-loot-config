@@ -1,30 +1,23 @@
 {
   "name": "Bot Item Marker",
-  "description": "在所有物品名稱前後加上亮綠色【】標記，方便 bot 偵測",
+  "description": "在物品名稱前加上紫色§標記，方便 bot 偵測",
   "author": "Jarvis",
-  "website": "https://github.com/jonesandjay123/d2r-bot-research",
-  "version": "1.0.0",
+  "website": "https://github.com/jonesandjay123/d2r-loot-config",
+  "version": "1.1.0",
   "config": [
     {
       "id": "markerColor",
       "name": "標記顏色代碼",
       "description": "ÿc0=白, ÿc1=紅, ÿc2=亮綠, ÿc3=藍, ÿc4=金, ÿc8=橘, ÿc9=黃, ÿc;=紫",
       "type": "string",
-      "defaultValue": "ÿc2"
+      "defaultValue": "ÿc;"
     },
     {
-      "id": "markerLeft",
-      "name": "左側標記符號",
+      "id": "markerSymbol",
+      "name": "標記符號",
       "description": "物品名前面加的符號",
       "type": "string",
-      "defaultValue": "【"
-    },
-    {
-      "id": "markerRight",
-      "name": "右側標記符號",
-      "description": "物品名後面加的符號",
-      "type": "string",
-      "defaultValue": "】"
+      "defaultValue": "§"
     }
   ]
 }
