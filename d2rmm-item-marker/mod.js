@@ -17,7 +17,7 @@ const LANGUAGES = [
 ];
 
 // 讀取物品名稱表（用正斜線）
-const filePath = "data/local/lng/strings/item-names.json";
+const filePath = "local/lng/strings/item-names.json";
 const itemNames = D2RMM.readJson(filePath);
 
 if (itemNames == null) {
