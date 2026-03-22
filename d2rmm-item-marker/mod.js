@@ -1,6 +1,7 @@
 /**
- * Bot Item Marker — 在物品名稱後加上紫色§標記
- * 只改兩個檔案：物品名 + 符文名（不動 modifiers 避免汙染 UI）
+ * Bot Item Marker — 在物品名稱後加上§標記
+ * § 跟隨物品本身顏色（暗金=金色§，綠裝=綠色§，白裝=白色§）
+ * 不使用任何顏色代碼，避免汙染 tooltip
  */
 
 const LANGUAGES = [
@@ -22,7 +23,8 @@ for (const filePath of FILES) {
   for (const entry of data) {
     for (const lang of LANGUAGES) {
       if (entry[lang] && !entry[lang].endsWith("§")) {
-        entry[lang] = entry[lang] + " " + "ÿc;" + "§" + "ÿc0";
+        // 不加顏色代碼，§ 自然跟隨物品顏色
+        entry[lang] = entry[lang] + " §";
       }
     }
   }
