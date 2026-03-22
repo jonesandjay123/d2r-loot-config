@@ -22,7 +22,7 @@ for (const filePath of FILES) {
   for (const entry of data) {
     for (const lang of LANGUAGES) {
       if (entry[lang] && !entry[lang].endsWith("§")) {
-        entry[lang] = entry[lang] + " " + "ÿc;" + "§";
+        entry[lang] = entry[lang] + " " + "ÿc;" + "§" + "ÿc0";
       }
     }
   }
