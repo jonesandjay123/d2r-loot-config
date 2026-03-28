@@ -405,6 +405,9 @@
       "enabled": true,
       "ruleType": "hide",
       "filterEtherealSocketed": false,
+      "equipmentRarity": [
+        "unique"
+      ],
       "equipmentQuality": [
         "normal"
       ],
